@@ -1,0 +1,6 @@
+*.csv
+*.txt
+*.txt.gz
+myenv/
+data/
+
