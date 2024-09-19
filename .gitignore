@@ -4,4 +4,6 @@
 myenv/
 data/
 credentials.json
-
+.venv/
+temporal-frame-436108-u7-be1f6804ffae.json
+temporal-frame-436108-u7-cfd108ee287e.json
