@@ -3,4 +3,5 @@
 *.txt.gz
 myenv/
 data/
+credentials.json
 
