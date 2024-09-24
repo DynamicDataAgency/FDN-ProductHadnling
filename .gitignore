@@ -1,7 +1,7 @@
 *.csv
-*.txt
 *.txt.gz
 myenv/
+data-update-process/
 data/
 credentials.json
 .venv/
