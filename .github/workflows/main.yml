@@ -11,10 +11,10 @@ jobs:
     
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Updated to v3 to support Node.js 16/20
+      uses: actions/checkout@v3  # This will be updated to Node.js 20 automatically by GitHub
 
     - name: Set up Python
-      uses: actions/setup-python@v4  # Updated to v4 to support Node.js 16/20
+      uses: actions/setup-python@v4  # This will be updated to Node.js 20 automatically by GitHub
       with:
         python-version: '3.8'  # Use the appropriate Python version
 
