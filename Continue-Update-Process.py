@@ -195,10 +195,11 @@ scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/au
 # Add credentials to the account
 # declare CREDENTIALS_GOOGLE_CLOUD environment variable 
 
+import os
+Credentials = os.getenv('CREDENTIALS_GOOGLE_CLOUD')
 
 
-
-creds = ServiceAccountCredentials.from_json_keyfile_name(process.env.CREDENTIALS_GOOGLE_CLOUD, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(Credentials, scope)
 
 # Authorize the clientsheet
 client = gspread.authorize(creds)
