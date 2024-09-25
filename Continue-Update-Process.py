@@ -126,7 +126,7 @@ else:
 
 
 df= df[df["Category"] == "NFL"]
-df=df.head(1000)
+df=df.head(2000)
 
 
 # In[5]:
@@ -193,7 +193,7 @@ from gspread_dataframe import set_with_dataframe
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
 # Add credentials to the account
-creds = ServiceAccountCredentials.from_json_keyfile_name(process.env.MY_SECRET, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(process.env.CREDENTIALS_GOOGLE_CLOUD, scope)
 
 # Authorize the clientsheet
 client = gspread.authorize(creds)
