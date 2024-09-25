@@ -179,7 +179,7 @@ nf['Variant Inventory Qty'] = '1'
 
 # ### Save to google sheet
 
-# In[7]:
+# In[10]:
 
 
 #./myenv/Scripts/Activate.ps1
@@ -193,6 +193,11 @@ from gspread_dataframe import set_with_dataframe
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
 # Add credentials to the account
+# declare CREDENTIALS_GOOGLE_CLOUD environment variable 
+
+
+
+
 creds = ServiceAccountCredentials.from_json_keyfile_name(process.env.CREDENTIALS_GOOGLE_CLOUD, scope)
 
 # Authorize the clientsheet
@@ -210,6 +215,18 @@ sheet.clear()
 
 # Write DataFrame to Google Sheet
 set_with_dataframe(sheet, nf)
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
