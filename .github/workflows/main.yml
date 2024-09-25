@@ -11,7 +11,7 @@ jobs:
     
     steps:
     - name: Read Variable
-      run: echo "My variable ${{variable.CREDENTIALS_GOOGLE_CLOUD}} "
+      run: echo "My variable ${{vars.CREDENTIALS_GOOGLE_CLOUD}} "
     
     - name: Checkout code
       uses: actions/checkout@v3  # This will be updated to Node.js 20 automatically by GitHub
