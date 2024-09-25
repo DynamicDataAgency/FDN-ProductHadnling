@@ -193,7 +193,7 @@ from gspread_dataframe import set_with_dataframe
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
 # Add credentials to the account
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(process.env.MY_SECRET, scope)
 
 # Authorize the clientsheet
 client = gspread.authorize(creds)
