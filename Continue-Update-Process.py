@@ -5,7 +5,7 @@
 
 # ##### jupyter nbconvert --to script Continue-Update-Process.ipynb
 
-# In[1]:
+# In[2]:
 
 
 import ftplib
@@ -74,7 +74,7 @@ for attempt in range(max_retries):
 
 # ### Decompress downloaded file
 
-# In[8]:
+# In[3]:
 
 
 import gzip
@@ -99,7 +99,7 @@ for filename in os.listdir(directory):
 
 # ### Convert to a Pandas DataFrame
 
-# In[3]:
+# In[4]:
 
 
 import pandas as pd
@@ -122,14 +122,14 @@ else:
 
 # ### Filter needed products
 
-# In[4]:
+# In[5]:
 
 
 df= df[df["Category"] == "NFL"]
 df=df.head(2000)
 
 
-# In[5]:
+# In[6]:
 
 
 df.shape
@@ -137,7 +137,7 @@ df.shape
 
 # ### Transformations to fit Shopify product import
 
-# In[6]:
+# In[7]:
 
 
 # Count the occurrences of each value in the 'Text3' column of the 'nf' dataframe
@@ -179,10 +179,11 @@ nf['Variant Inventory Qty'] = '1'
 
 # ### Save to google sheet
 
-# In[10]:
+# In[8]:
 
 
 #./myenv/Scripts/Activate.ps1
+import os
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -193,13 +194,10 @@ from gspread_dataframe import set_with_dataframe
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
 # Add credentials to the account
-# declare CREDENTIALS_GOOGLE_CLOUD environment variable 
 
-import os
-Credentials = os.getenv('CREDENTIALS_GOOGLE_CLOUD')
+Credentials = os.getenv('CREDENTIALS_GOOGLE_CLOUD') 
 
-
-creds = ServiceAccountCredentials.from_json_keyfile_name(Credentials, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name(Credentials, scope) 
 
 # Authorize the clientsheet
 client = gspread.authorize(creds)
