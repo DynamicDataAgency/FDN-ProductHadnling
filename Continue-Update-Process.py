@@ -3,6 +3,8 @@
 
 # ### Query FTP
 
+# ##### jupyter nbconvert --to script Continue-Update-Process.ipynb
+
 # In[1]:
 
 
@@ -72,7 +74,7 @@ for attempt in range(max_retries):
 
 # ### Decompress downloaded file
 
-# In[2]:
+# In[8]:
 
 
 import gzip
@@ -112,7 +114,7 @@ local_txt_filename = os.path.join(directory, "Fanatics-Product-Catalog_IR.txt")
 # Load the decompressed .txt file into a Pandas DataFrame
 if os.path.exists(local_txt_filename):
     # Assuming the file is tab-delimited, adjust the delimiter if necessary
-    df = pd.read_csv(local_txt_filename, delimiter='\t')
+    df = pd.read_csv(local_txt_filename, delimiter='\t', low_memory=False)
     print(df.head())  # Display the first 5 rows
 else:
     print(f"{local_txt_filename} does not exist.")
