@@ -182,10 +182,12 @@ nf['Variant Inventory Qty'] = '1'
 # In[7]:
 
 
-# ./myenv/Scripts/Activate.ps1
+#./myenv/Scripts/Activate.ps1
 import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+
+from gspread_dataframe import set_with_dataframe
 
 # Define the scope
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
@@ -202,15 +204,12 @@ spreadsheet = client.open("Fanatics_product_import")
 # Select the first sheet (or specify another sheet)
 sheet = spreadsheet.sheet1  
 
+
 # Clear existing data in the sheet (optional)
 sheet.clear()
 
-# Assuming nf is your DataFrame
-# Convert the DataFrame to a list of lists (gspread expects data in list format)
-data = [nf.columns.values.tolist()] + nf.values.tolist()
-
-# Write the data to Google Sheet
-sheet.update('A1', data)
+# Write DataFrame to Google Sheet
+set_with_dataframe(sheet, nf)
 
 
 # In[ ]:
