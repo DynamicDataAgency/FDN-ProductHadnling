@@ -1,14 +1,17 @@
 name: Daily Update Process
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
   schedule:
     - cron: '10 * * * *'
+  push:
+    branches:
+      - credentials-test
 
 jobs:
   update_process:
     runs-on: ubuntu-latest
-    environment: Script running environment  
+    environment: Script running environment
 
     steps:
     - name: Checkout code
@@ -24,18 +27,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install pandas gspread oauth2client gspread_dataframe python-dotenv
 
+    - name: Set up Google Cloud credentials
+      run: |
+        echo "${{ secrets.CREDENTIALS_GOOGLE_CLOUD }}" > $HOME/credentials.json
+        cat $HOME/credentials.json  # Debug: Check if the file is correctly created
+      shell: bash
+
+    - name: Verify credentials file existence
+      run: |
+        ls -la $HOME/credentials.json  # Debug: Ensure the file exists and is readable
+      shell: bash
+
     - name: Run update process
       run: python Continue-Update-Process.py
       env:
-        GOOGLE_CLOUD_CREDENTIALS: ${{ secrets.CREDENTIALS_GOOGLE_CLOUD }}  # Now using secrets for Google Cloud credentials
-        TYPE: ${{ secrets.TYPE }}
-        PROJECT_ID: ${{ secrets.PROJECT_ID }}
-        PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        AUTH_URI: ${{ secrets.AUTH_URI }}
-        TOKEN_URI: ${{ secrets.TOKEN_URI }}
-        AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}
-        CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}
-        UNIVERSE_DOMAIN: ${{ secrets.UNIVERSE_DOMAIN }}
+        GOOGLE_APPLICATION_CREDENTIALS: $HOME/credentials.json
