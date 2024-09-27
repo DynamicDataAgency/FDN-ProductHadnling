@@ -1,0 +1,50 @@
+name: Daily Update Process - Complete
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '10 * * * *'
+
+jobs:
+  update_process_complete:
+    runs-on: ubuntu-latest
+    environment: Script running environment
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas gspread oauth2client gspread_dataframe python-dotenv
+
+    - name: Set up Google Cloud credentials
+      run: |
+        echo "${{ secrets.CREDENTIALS_GOOGLE_CLOUD }}" > $HOME/credentials.json
+        cat $HOME/credentials.json  # Debug: Check if the file is correctly created
+      shell: bash
+
+    - name: Verify credentials file existence
+      run: |
+        ls -la $HOME/credentials.json  # Debug: Ensure the file exists and is readable
+      shell: bash
+
+    - name: Download file from FTP
+      run: python download_file.py
+
+    - name: Decompress downloaded file
+      run: python decompress_file.py
+
+    - name: Transform data for Shopify import
+      run: python transform_data.py
+
+    - name: Upload transformed data to Google Sheets
+      run: python upload_to_gsheet.py
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: $HOME/credentials.json
