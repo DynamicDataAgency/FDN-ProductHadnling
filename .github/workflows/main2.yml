@@ -6,7 +6,7 @@ on:
     - cron: '10 * * * *'
 
 jobs:
-  update_process_complete:
+  update_process_just_GoogleSheets:
     runs-on: ubuntu-latest
     environment: Script running environment
 
