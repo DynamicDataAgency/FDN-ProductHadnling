@@ -7,11 +7,11 @@ import os
 # Define the scope
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
-# Use the Google Application Credentials from the environment variable
-creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+# Get the Google Application Credentials file path from the environment
+creds_path = os.path.expanduser(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 
-if creds_path is None:
-    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.")
+if creds_path is None or not os.path.exists(creds_path):
+    raise ValueError(f"GOOGLE_APPLICATION_CREDENTIALS environment variable is not set or the file doesn't exist: {creds_path}")
 
 # Authorize using the credentials file path
 creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
