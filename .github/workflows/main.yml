@@ -27,6 +27,12 @@ jobs:
     - name: Set up Google Cloud credentials
       run: |
         echo "${{ secrets.CREDENTIALS_GOOGLE_CLOUD }}" > $HOME/credentials.json
+        cat $HOME/credentials.json  # Debug: Check if the file is correctly created
+      shell: bash
+
+    - name: Verify credentials file existence
+      run: |
+        ls -la $HOME/credentials.json  # Debug: Ensure the file exists and is readable
       shell: bash
 
     - name: Run update process
