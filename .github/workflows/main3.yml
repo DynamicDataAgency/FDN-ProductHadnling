@@ -2,8 +2,7 @@ name: Daily Update Process - Complete
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '10 * * * *'
+
 
 jobs:
   update_process_complete:
@@ -45,6 +44,6 @@ jobs:
       run: python transform_data.py
 
     - name: Upload transformed data to Google Sheets
-      run: python upload_to_gsheet.py
+      run: python save_to_google_sheet.py
       env:
         GOOGLE_APPLICATION_CREDENTIALS: $HOME/credentials.json

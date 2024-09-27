@@ -2,8 +2,7 @@ name: Daily Update Process - Google Sheets
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '10 * * * *'
+
 
 jobs:
   update_process_just_GoogleSheets:
