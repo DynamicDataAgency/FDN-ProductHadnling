@@ -35,15 +35,6 @@ jobs:
         ls -la $HOME/credentials.json  # Debug: Ensure the file exists and is readable
       shell: bash
 
-    - name: Download file from FTP
-      run: python download_file.py
-
-    - name: Decompress downloaded file
-      run: python decompress_file.py
-
-    - name: Transform data for Shopify import
-      run: python transform_data.py
-
     - name: Upload transformed data to Google Sheets
       run: python upload_to_gsheet.py
       env:
