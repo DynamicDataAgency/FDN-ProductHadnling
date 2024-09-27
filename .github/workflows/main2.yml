@@ -1,4 +1,4 @@
-name: Daily Update Process3
+name: Daily Update Process - Google Sheets
 
 on:
   workflow_dispatch:

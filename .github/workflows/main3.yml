@@ -1,4 +1,4 @@
-name: Daily Update Process2
+name: Daily Update Process - Complete
 
 on:
   workflow_dispatch:
