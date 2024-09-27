@@ -12,6 +12,9 @@ dotenv.load_dotenv()
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
 
+# Save to a JSON file
+with open('credentials.json', 'w') as json_file:
+    json.dump(os.getenv("CREDENTIALS_GOOGLE_CLOUD"), json_file)
 
 # Authorize using the JSON file
 creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
