@@ -26,10 +26,10 @@ jobs:
 
     - name: Set up Google Cloud credentials
       run: |
-        echo ${{ secrets.CREDENTIALS_GOOGLE_CLOUD }} > $HOME/gcp_credentials.json
+        echo "${{ secrets.CREDENTIALS_GOOGLE_CLOUD }}" > $HOME/credentials.json
       shell: bash
 
     - name: Run update process
       run: python Continue-Update-Process.py
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: $HOME/gcp_credentials.json
+        GOOGLE_APPLICATION_CREDENTIALS: $HOME/credentials.json
