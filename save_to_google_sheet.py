@@ -3,21 +3,18 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from gspread_dataframe import set_with_dataframe
 import os
-import dotenv
-import json
-
-dotenv.load_dotenv()
 
 # Define the scope
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
+# Use the Google Application Credentials from the environment variable
+creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-# Save to a JSON file
-with open('credentials.json', 'w') as json_file:
-    json.dump(os.getenv("CREDENTIALS_GOOGLE_CLOUD"), json_file)
+if creds_path is None:
+    raise ValueError("GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.")
 
-# Authorize using the JSON file
-creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+# Authorize using the credentials file path
+creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
 client = gspread.authorize(creds)
 
 # Load the processed DataFrame
