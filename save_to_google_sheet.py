@@ -27,3 +27,7 @@ sheet.clear()
 
 # Write DataFrame to Google Sheet
 set_with_dataframe(sheet, df)
+
+# success message
+print("Data successfully saved to Google Sheet!")
+
