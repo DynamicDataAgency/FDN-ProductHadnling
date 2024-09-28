@@ -5,22 +5,40 @@ from gspread_dataframe import set_with_dataframe
 import os
 import json
 from dotenv import load_dotenv
+from google.oauth2 import service_account
 
 # Load environment variables from .env file
 load_dotenv()
 
 # Define the scope for accessing Google Sheets and Google Drive
-scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
+scopes = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
 # Retrieve the credentials JSON from the environment variable
-creds_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+TYPE = os.getenv("service_account")
+PROJECT_ID = os.getenv("project_id")
+PRIVATE_KEY_ID = os.getenv("private_key_id")
+PRIVATE_KEY = os.getenv("private_key")
+CLIENT_EMAIL = os.getenv("client_email")
+CLIENT_ID = os.getenv("client_id")
+AUTH_URI = os.getenv("auth_uri")
+TOKEN_URI = os.getenv("token_uri")
+AUTH_PROVIDER_X509_CERT_URL = os.getenv("auth_provider_x509_cert_url")
+CLIENT_X509_CERT_URL = os.getenv("client_x509_cert_url")
 
-# Parse the JSON string into a Python dictionary
-creds_dict = json.loads(creds_json)
 
-# Authorize with the credentials
-creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-client = gspread.authorize(creds)
+credentials = service_account.Credentials.from_service_account_info({
+        "project_id": os.getenv("project_id"),
+        "private_key_id": os.getenv("private_key_id"),
+        "private_key": os.getenv("private_key"),
+        "client_email": os.getenv("client_email"),
+        "client_id": os.getenv("CLIENT_ID"),
+        "auth_uri": os.getenv("AUTH_URI"),
+        "token_uri": os.getenv("TOKEN_URI"),
+        "auth_provider_x509_cert_url": os.getenv("AUTH_PROVIDER_X509_CERT_URL"),
+        "client_x509_cert_url": os.getenv("CLIENT_X509_CERT_URL"),
+    }, scopes=scopes)
+
+client = gspread.authorize(credentials)
 
 # Load the processed DataFrame
 df = pd.read_csv('processed_data.csv')
