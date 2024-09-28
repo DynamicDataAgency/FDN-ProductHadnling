@@ -14,9 +14,11 @@ creds_path = os.path.expanduser(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 with open('credentials.json', 'w') as f:
     f.write(creds_path)
 
+print(creds_path)
 
 # Authorize using the credentials file path
 creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+
 client = gspread.authorize(creds)
 
 # Load the processed DataFrame
