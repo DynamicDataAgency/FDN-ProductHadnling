@@ -7,7 +7,7 @@ ftp_server = "products.impact.com"
 ftp_user = "ps-ftp_5567077"
 ftp_password = "6r%]mobnH6"
 ftp_directory = "/Fanatics-(Global)/"
-file_to_download = "Fanatics-Product-Catalog_IR.txt.gz"  # Specify the file to download 
+file_to_download = "Fanatics-Product-Catalog_IR.txt.gz"  # Specify the file to download
 
 # Local directory to save the file
 local_directory = "data-update-process"
@@ -59,3 +59,4 @@ for attempt in range(max_retries):
         if attempt == max_retries - 1:
             print("Max retries reached. Exiting.")
             raise e  # Re-raise the exception if all retries fail
+        time.sleep(retry_delay)  # Wait before retrying
