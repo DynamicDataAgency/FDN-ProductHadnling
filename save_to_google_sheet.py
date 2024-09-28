@@ -15,7 +15,7 @@ scopes = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/a
 
 # Retrieve the credentials JSON from the environment variable
 TYPE = os.getenv("service_account")
-PROJECT_ID = os.getenv("project_id")
+PROJECT_ID = os.getenv("PROJECT_ID")
 PRIVATE_KEY_ID = os.getenv("private_key_id")
 PRIVATE_KEY = os.getenv("private_key")
 CLIENT_EMAIL = os.getenv("client_email")
