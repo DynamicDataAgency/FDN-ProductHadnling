@@ -7,21 +7,15 @@ import os
 # Define the scope
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
-# Get the Google Application Credentials file path from the environment
-creds_path = os.path.expanduser(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 
-## save creds_path to credentials.json
-with open('credentials.json', 'w') as f:
-    f.write(creds_path)
-
-print(creds_path)
 
 # Authorize using the credentials file path
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json")
 
 client = gspread.authorize(creds)
 
 # Load the processed DataFrame
+
 df = pd.read_csv('processed_data.csv')
 
 # Open the Google Sheet (by name or by key)
