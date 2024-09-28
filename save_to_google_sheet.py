@@ -45,3 +45,11 @@ df = pd.read_csv('processed_data.csv')
 
 # Open the Google Sheet (by name or by key)
 spreadsheet = client.open("Fanatics_product_import")
+
+# Save the DataFrame to the Google Sheet
+worksheet = spreadsheet.get_worksheet(0)
+set_with_dataframe(worksheet, df)
+print("Data saved to Google Sheet")
+
+
+

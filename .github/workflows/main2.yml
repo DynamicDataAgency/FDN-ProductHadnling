@@ -27,16 +27,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install pandas gspread oauth2client gspread_dataframe python-dotenv
 
-    - name: Set up Google Cloud credentials
-      run: |
-        echo "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" > $HOME/credentials.json
-        cat $HOME/credentials.json  # Debug: Check if the file is correctly created
-      shell: bash
 
-
-    - name: Verify credentials file existence
+    - name: Debug Environment Variables
       run: |
-        ls -la $HOME/credentials.json  # Debug: Ensure the file exists and is readable
+        echo "PROJECT_ID: ${{ secrets.PROJECT_ID }}"
+        echo "CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}"
+        echo "TYPE: ${{ secrets.TYPE }}"
+        echo "PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}"
+        echo "CLIENT_ID: ${{ secrets.CLIENT_ID }}"
+        echo "AUTH_URI: ${{ secrets.AUTH_URI }}"
+        echo "TOKEN_URI: ${{ secrets.TOKEN_URI }}"
+        echo "AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}"
+        echo "CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}"
       shell: bash
 
     - name: Upload transformed data to Google Sheets
@@ -53,5 +55,5 @@ jobs:
         TOKEN_URI: ${{ secrets.TOKEN_URI }}
         AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}
         CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}
-        
+
 
