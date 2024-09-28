@@ -43,7 +43,7 @@ jobs:
     - name: Upload transformed data to Google Sheets
       run: python save_to_google_sheet.py
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ vars.GOOGLE_APPLICATION_CREDENTIALS }}
+        
         TYPE: ${{ vars.TYPE }}
         PROJECT_ID: ${{ vars.PROJECT_ID }}
         PRIVATE_KEY_ID: ${{ vars.PRIVATE_KEY_ID }}
