@@ -6,21 +6,20 @@ import os
 import json
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
 load_dotenv()
 
-# Define the scope
+# Define the scope for accessing Google Sheets and Google Drive
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
-creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
+# Retrieve the credentials JSON from the environment variable
+creds_json = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-print("creds_path: " + str(creds_path))
+# Parse the JSON string into a Python dictionary
+creds_dict = json.loads(creds_json)
 
-# Load the credentials from the file
-with open(creds_path, 'r') as f:
-    creds_json = json.load(f)
-
-creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
-
+# Authorize with the credentials
+creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 
 # Load the processed DataFrame
@@ -28,13 +27,3 @@ df = pd.read_csv('processed_data.csv')
 
 # Open the Google Sheet (by name or by key)
 spreadsheet = client.open("Fanatics_product_import")
-sheet = spreadsheet.sheet1  
-
-# Clear existing data in the sheet (optional)
-sheet.clear()
-
-# Write DataFrame to Google Sheet
-set_with_dataframe(sheet, df)
-
-# Success message
-print("Data successfully saved to Google Sheet!")
