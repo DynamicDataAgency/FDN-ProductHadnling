@@ -10,8 +10,10 @@ scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/au
 # Get the Google Application Credentials file path from the environment
 creds_path = os.path.expanduser(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 
-if creds_path is None or not os.path.exists(creds_path):
-    raise ValueError(f"GOOGLE_APPLICATION_CREDENTIALS environment variable is not set or the file doesn't exist: {creds_path}")
+## save creds_path to credentials.json
+with open('credentials.json', 'w') as f:
+    f.write(creds_path)
+
 
 # Authorize using the credentials file path
 creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
