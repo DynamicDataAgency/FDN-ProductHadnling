@@ -14,7 +14,7 @@ if creds_path is None or not os.path.exists(creds_path):
     raise ValueError(f"GOOGLE_APPLICATION_CREDENTIALS environment variable is not set or the file doesn't exist: {creds_path}")
 
 # Authorize using the credentials file path
-creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
+creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
 client = gspread.authorize(creds)
 
 # Load the processed DataFrame
