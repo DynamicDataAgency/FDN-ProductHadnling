@@ -7,7 +7,7 @@ ftp_server = "products.impact.com"
 ftp_user = "ps-ftp_5567077"
 ftp_password = "6r%]mobnH6"
 ftp_directory = "/Fanatics-(Global)/"
-file_to_download = "Fanatics-Product-Catalog_IR.txt.gz"  # Specify the file to download
+file_to_download = "Fanatics-Product-Catalog_IR.txt.gz"  # Specify the file to download 
 
 # Local directory to save the file
 local_directory = "data-update-process"
