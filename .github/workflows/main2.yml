@@ -30,7 +30,7 @@ jobs:
 
     - name: Debug Environment Variables
       run: |
-        echo "PROJECT_ID: ${{ vars.PROJECT_ID }}"
+        echo "PROJECT_ID: $PROJECT_ID"
         echo "CLIENT_EMAIL: ${{ vars.CLIENT_EMAIL }}"
         echo "TYPE: ${{ vars.TYPE }}"
         echo "PRIVATE_KEY_ID: ${{ vars.PRIVATE_KEY_ID }}"
