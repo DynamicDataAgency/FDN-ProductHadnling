@@ -29,31 +29,31 @@ jobs:
 
     - name: Debug Environment Variables
       run: |
-        echo "PROJECT_ID: ${{ vars.PROJECT_ID }} "
-        echo "CLIENT_EMAIL: ${{ vars.CLIENT_EMAIL }}"
-        echo "TYPE: ${{ vars.TYPE }}"
-        echo "PRIVATE_KEY_ID: ${{ vars.PRIVATE_KEY_ID }}"
-        echo "PRIVATE_KEY: ${{ vars.PRIVATE_KEY }}"
-        echo "CLIENT_ID: ${{ vars.CLIENT_ID }}"
-        echo "AUTH_URI: ${{ vars.AUTH_URI }}"
-        echo "TOKEN_URI: ${{ vars.TOKEN_URI }}"
-        echo "AUTH_PROVIDER_X509_CERT_URL: ${{ vars.AUTH_PROVIDER_X509_CERT_URL }}"
-        echo "CLIENT_X509_CERT_URL: ${{ vars.CLIENT_X509_CERT_URL }}"
+        echo "PROJECT_ID: ${{ secrets.PROJECT_ID }} "
+        echo "CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}"
+        echo "TYPE: ${{ secrets.TYPE }}"
+        echo "PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}"
+        echo "PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}"
+        echo "CLIENT_ID: ${{ secrets.CLIENT_ID }}"
+        echo "AUTH_URI: ${{ secrets.AUTH_URI }}"
+        echo "TOKEN_URI: ${{ secrets.TOKEN_URI }}"
+        echo "AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}"
+        echo "CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}"
       shell: bash
 
     - name: Upload transformed data to Google Sheets
       run: python save_to_google_sheet.py
       env:
         
-        TYPE: ${{ vars.TYPE }}
-        PROJECT_ID: ${{ vars.PROJECT_ID }}
-        PRIVATE_KEY_ID: ${{ vars.PRIVATE_KEY_ID }}
-        PRIVATE_KEY: ${{ vars.PRIVATE_KEY }}
-        CLIENT_EMAIL: ${{ vars.CLIENT_EMAIL }}
-        CLIENT_ID: ${{ vars.CLIENT_ID }}
-        AUTH_URI: ${{ vars.AUTH_URI }}
-        TOKEN_URI: ${{ vars.TOKEN_URI }}
-        AUTH_PROVIDER_X509_CERT_URL: ${{ vars.AUTH_PROVIDER_X509_CERT_URL }}
-        CLIENT_X509_CERT_URL: ${{ vars.CLIENT_X509_CERT_URL }}
+        TYPE: ${{ secrets.TYPE }}
+        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        AUTH_URI: ${{ secrets.AUTH_URI }}
+        TOKEN_URI: ${{ secrets.TOKEN_URI }}
+        AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}
+        CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}
 
 
