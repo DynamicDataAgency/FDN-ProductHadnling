@@ -24,7 +24,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pandas gspread oauth2client gspread_dataframe python-dotenv gzip shutil
+        pip install pandas gspread oauth2client gspread_dataframe python-dotenv
 
 
     - name: Debug Environment Variables
