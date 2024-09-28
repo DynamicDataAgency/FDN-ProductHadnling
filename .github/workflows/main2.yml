@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     
     environment: Script running environment
-
+    env:
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -38,5 +40,4 @@ jobs:
 
     - name: Upload transformed data to Google Sheets
       run: python save_to_google_sheet.py
-      env:
-        GOOGLE_APPLICATION_CREDENTIALS: $HOME/credentials.json
+
