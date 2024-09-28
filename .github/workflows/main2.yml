@@ -35,6 +35,6 @@ jobs:
       shell: bash
 
     - name: Upload transformed data to Google Sheets
-      run: python upload_to_gsheet.py
+      run: python save_to_google_sheet.py
       env:
         GOOGLE_APPLICATION_CREDENTIALS: $HOME/credentials.json
