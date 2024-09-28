@@ -3,15 +3,15 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from gspread_dataframe import set_with_dataframe
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Define the scope
 scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
-
-
 creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
-print(creds_path)
+print("creds_path: " + str(creds_path))
 
 creds = ServiceAccountCredentials.from_json(creds_path)
 
