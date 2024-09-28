@@ -25,16 +25,16 @@ jobs:
 
     - name: Set up Google Cloud credentials
       run: |
-        echo "${{ secrets.CREDENTIALS_GOOGLE_CLOUD }}" > credentials.json
-        cat credentials.json  # Debug: Check if the file is correctly created
+        echo "${{ secrets.CREDENTIALS_GOOGLE_CLOUD }}" > $HOME/credentials.json
+        cat $HOME/credentials.json  # Debug: Check if the file is correctly created
       shell: bash
 
     - name: Verify credentials file existence
       run: |
-        ls -la credentials.json  # Debug: Ensure the file exists and is readable
+        ls -la $HOME/credentials.json  # Debug: Ensure the file exists and is readable
       shell: bash
 
     - name: Upload transformed data to Google Sheets
-      run: python save_to_google_sheet.py
+      run: python upload_to_gsheet.py
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: credentials.json
+        GOOGLE_APPLICATION_CREDENTIALS: $HOME/credentials.json
