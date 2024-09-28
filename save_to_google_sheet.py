@@ -24,6 +24,7 @@ AUTH_URI = os.getenv("AUTH_URI")
 TOKEN_URI = os.getenv("TOKEN_URI")
 AUTH_PROVIDER_X509_CERT_URL = os.getenv("AUTH_PROVIDER_X509_CERT_URL")
 CLIENT_X509_CERT_URL = os.getenv("CLIENT_X509_CERT_URL")
+GOOGLE_APPLICATION_CREDENTIALS3 = os.getenv("GOOGLE_APPLICATION_CREDENTIALS3")
 
 print(TYPE)
 print(PROJECT_ID)
@@ -35,12 +36,13 @@ print(AUTH_URI)
 print(TOKEN_URI)
 print(AUTH_PROVIDER_X509_CERT_URL)
 print(CLIENT_X509_CERT_URL)
+print(GOOGLE_APPLICATION_CREDENTIALS3)
 
 
 credentials = service_account.Credentials.from_service_account_info({
         "project_id": os.getenv("PROJECT_ID"),
         "private_key_id": os.getenv("PRIVATE_KEY_ID"),
-        "private_key": os.getenv("PRIVATE_KEY").replace('\\n', '\n'),
+        "private_key": os.getenv("PRIVATE_KEY"),
         "client_email": os.getenv("CLIENT_EMAIL"),
         "client_id": os.getenv("CLIENT_ID"),
         "auth_uri": os.getenv("AUTH_URI"),
@@ -48,6 +50,10 @@ credentials = service_account.Credentials.from_service_account_info({
         "auth_provider_x509_cert_url": os.getenv("AUTH_PROVIDER_X509_CERT_URL"),
         "client_x509_cert_url": os.getenv("CLIENT_X509_CERT_URL"),
     }, scopes=scopes)
+
+credentials2 = service_account.Credentials.from_service_account_file("credentials.json", scopes=scopes)
+
+
 
 client = gspread.authorize(credentials)
 
