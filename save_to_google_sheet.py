@@ -14,16 +14,16 @@ load_dotenv()
 scopes = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/drive']
 
 # Retrieve the credentials JSON from the environment variable
-TYPE = os.getenv("service_account")
+TYPE = os.getenv("TYPE")
 PROJECT_ID = os.getenv("PROJECT_ID")
-PRIVATE_KEY_ID = os.getenv("private_key_id")
-PRIVATE_KEY = os.getenv("private_key")
-CLIENT_EMAIL = os.getenv("client_email")
-CLIENT_ID = os.getenv("client_id")
-AUTH_URI = os.getenv("auth_uri")
-TOKEN_URI = os.getenv("token_uri")
-AUTH_PROVIDER_X509_CERT_URL = os.getenv("auth_provider_x509_cert_url")
-CLIENT_X509_CERT_URL = os.getenv("client_x509_cert_url")
+PRIVATE_KEY_ID = os.getenv("PRIVATE_KEY_ID")
+PRIVATE_KEY = os.getenv("PRIVATE_KEY")
+CLIENT_EMAIL = os.getenv("CLIENT_EMAIL")
+CLIENT_ID = os.getenv("CLIENT_ID")
+AUTH_URI = os.getenv("AUTH_URI")
+TOKEN_URI = os.getenv("TOKEN_URI")
+AUTH_PROVIDER_X509_CERT_URL = os.getenv("AUTH_PROVIDER_X509_CERT_URL")
+CLIENT_X509_CERT_URL = os.getenv("CLIENT_X509_CERT_URL")
 
 print(TYPE)
 print(PROJECT_ID)
@@ -36,4 +36,29 @@ print(TOKEN_URI)
 print(AUTH_PROVIDER_X509_CERT_URL)
 print(CLIENT_X509_CERT_URL)
 
+
+credentials = service_account.Credentials.from_service_account_info({
+        "project_id": os.getenv("PROJECT_ID"),
+        "private_key_id": os.getenv("PRIVATE_KEY_ID"),
+        "private_key": os.getenv("PRIVATE_KEY"),
+        "client_email": os.getenv("CLIENT_EMAIL"),
+        "client_id": os.getenv("CLIENT_ID"),
+        "auth_uri": os.getenv("AUTH_URI"),
+        "token_uri": os.getenv("TOKEN_URI"),
+        "auth_provider_x509_cert_url": os.getenv("AUTH_PROVIDER_X509_CERT_URL"),
+        "client_x509_cert_url": os.getenv("CLIENT_X509_CERT_URL"),
+    }, scopes=scopes)
+
+client = gspread.authorize(credentials)
+
+# Load the processed DataFrame
+df = pd.read_csv('processed_data.csv')
+
+# Open the Google Sheet (by name or by key)
+spreadsheet = client.open("Fanatics_product_import")
+
+# Save the DataFrame to the Google Sheet
+worksheet = spreadsheet.get_worksheet(0)
+set_with_dataframe(worksheet, df)
+print("Data saved to Google Sheet")
 
