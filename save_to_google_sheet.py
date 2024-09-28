@@ -9,8 +9,8 @@ scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/au
 
 
 
-# Authorize using the credentials file path
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json")
+creds_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "credentials.json")
+creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path)
 
 client = gspread.authorize(creds)
 
