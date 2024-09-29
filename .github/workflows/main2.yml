@@ -4,65 +4,58 @@ on:
   workflow_dispatch:
   push:
   schedule:
-    - cron: '10 * * * *'
+    - cron: "10 * * * *"
 
 jobs:
   update_process_just_GoogleSheets:
     runs-on: ubuntu-latest
-    
 
-    
     steps:
-  
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.8'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.8"
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pandas gspread oauth2client gspread_dataframe python-dotenv
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas gspread oauth2client gspread_dataframe python-dotenv
 
+      - name: Debug Environment Variables
+        run: |
+          echo "PROJECT_ID: ${{ secrets.PROJECT_ID }} "
+          echo "CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}"
+          echo "TYPE: ${{ secrets.TYPE }}"
+          echo "PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}"
+          echo "PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}"
+          echo "CLIENT_ID: ${{ secrets.CLIENT_ID }}"
+          echo "AUTH_URI: ${{ secrets.AUTH_URI }}"
+          echo "TOKEN_URI: ${{ secrets.TOKEN_URI }}"
+          echo "AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}"
+          echo "CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}"
+        shell: bash
 
-    - name: Debug Environment Variables
-      run: |
-        echo "PROJECT_ID: ${{ secrets.PROJECT_ID }} "
-        echo "CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}"
-        echo "TYPE: ${{ secrets.TYPE }}"
-        echo "PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}"
-        echo "PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}"
-        echo "CLIENT_ID: ${{ secrets.CLIENT_ID }}"
-        echo "AUTH_URI: ${{ secrets.AUTH_URI }}"
-        echo "TOKEN_URI: ${{ secrets.TOKEN_URI }}"
-        echo "AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}"
-        echo "CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}"
-      shell: bash
-      
-    - name: Download file from FTP
-      run: python download_file.py
+      - name: Download file from FTP
+        run: python download_file.py
 
-    - name: Decompress downloaded file
-      run: python decompress_file.py
-    - name: Transform data for Shopify import
-      run: python process_data.py
+      - name: Decompress downloaded file
+        run: python decompress_file.py
+      - name: Transform data for Shopify import
+        run: python process_data.py
 
-    - name: Upload transformed data to Google Sheets
-      run: python save_to_google_sheet.py
-      env:
-        
-        TYPE: ${{ secrets.TYPE }}
-        PROJECT_ID: ${{ secrets.PROJECT_ID }}
-        PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
-        CLIENT_ID: ${{ secrets.CLIENT_ID }}
-        AUTH_URI: ${{ secrets.AUTH_URI }}
-        TOKEN_URI: ${{ secrets.TOKEN_URI }}
-        AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}
-        CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}
-
-
+      - name: Upload transformed data to Google Sheets
+        run: python save_to_google_sheet.py
+        env:
+          TYPE: ${{ secrets.TYPE }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          PRIVATE_KEY_ID: ${{ secrets.PRIVATE_KEY_ID }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          AUTH_URI: ${{ secrets.AUTH_URI }}
+          TOKEN_URI: ${{ secrets.TOKEN_URI }}
+          AUTH_PROVIDER_X509_CERT_URL: ${{ secrets.AUTH_PROVIDER_X509_CERT_URL }}
+          CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}

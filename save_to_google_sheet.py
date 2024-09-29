@@ -57,9 +57,8 @@ credentials = service_account.Credentials.from_service_account_info({
 
 client = gspread.authorize(credentials)
 
-
 # Open the Google Sheet (by name or by key)
-spreadsheet = client.open("Fanatics_product_import")
+spreadsheet = client.open("Fanatics_product_import")	
 
 # Save the DataFrame to the Google Sheet
 worksheet = spreadsheet.get_worksheet(0)
