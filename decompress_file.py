@@ -2,17 +2,16 @@ import gzip
 import shutil
 import os
 
-# Directory containing the downloaded .txt.gz files
-directory = os.path.join(os.getcwd(), "data-update-process")  # Path to the downloaded files
+# Get the current working directory
+directory = os.path.join(os.getcwd(), "data-update-process")
 
-# Decompress each .txt.gz file in the directory
-for filename in os.listdir(directory):
-    if filename.endswith('.txt.gz'):
-        local_gz_filename = os.path.join(directory, filename)
-        local_txt_filename = os.path.join(directory, filename[:-3])  # Remove the .gz extension
+# Path to the decompressed .txt file
+local_txt_filename = os.path.join(directory, "Fanatics-Product-Catalog_IR.txt")
 
-        # Decompress the .txt.gz file to .txt
-        with gzip.open(local_gz_filename, 'rb') as f_in:
-            with open(local_txt_filename, 'wb') as f_out: 
-                shutil.copyfileobj(f_in, f_out)
-                print(f"Decompressed {local_gz_filename} to {local_txt_filename}")
+# Load the decompressed .txt file into a Pandas DataFrame
+if os.path.exists(local_txt_filename):
+    # Assuming the file is tab-delimited, adjust the delimiter if necessary
+    df = pd.read_csv(local_txt_filename, delimiter='\t', low_memory=False)
+    print(df.head())  # Display the first 5 rows
+else:
+    print(f"{local_txt_filename} does not exist.")
