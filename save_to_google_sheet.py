@@ -53,9 +53,9 @@ credentials = service_account.Credentials.from_service_account_info({
 
 
 
+creds = ServiceAccountCredentials.from_json_keyfile_name("crds.json", scope) 
 
-
-client = gspread.authorize(credentials)
+client = gspread.authorize(creds)
 
 # Open the Google Sheet (by name or by key)
 spreadsheet = client.open("Fanatics_product_import")	
