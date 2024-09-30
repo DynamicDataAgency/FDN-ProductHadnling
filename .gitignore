@@ -4,6 +4,7 @@ myenv/
 data-update-process/
 data/
 credentials.json
+crds.json 
 .env
 .venv/
 temporal-frame-436108-u7-be1f6804ffae.json
