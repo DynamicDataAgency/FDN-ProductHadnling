@@ -60,8 +60,13 @@ client = gspread.authorize(creds)
 # Open the Google Sheet (by name or by key)
 spreadsheet = client.open("Fanatics_product_import")	
 
+# create same dataframe
+data = {'name': ['Tom', 'Nick', 'John', 'Alice'], 'Age': [20, 21, 19, 18]}
+
 # Save the DataFrame to the Google Sheet
 worksheet = spreadsheet.get_worksheet(0)
-set_with_dataframe(worksheet, nf)
+
+set_with_dataframe(worksheet, data)
+
 print("Data saved to Google Sheet")
 

@@ -38,13 +38,14 @@ jobs:
           echo "CLIENT_X509_CERT_URL: ${{ secrets.CLIENT_X509_CERT_URL }}"
         shell: bash
 
-      - name: Download file from FTP
-        run: python download_file.py
+      # - name: Download file from FTP
+      #   run: python download_file.py
 
-      - name: Decompress downloaded file
-        run: python decompress_file.py
-      - name: Transform data for Shopify import
-        run: python process_data.py
+      # - name: Decompress downloaded file
+      #   run: python decompress_file.py
+
+      # - name: Transform data for Shopify import
+      #   run: python process_data.py
 
       - name: Upload transformed data to Google Sheets
         run: python save_to_google_sheet.py
