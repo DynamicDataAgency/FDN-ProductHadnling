@@ -53,7 +53,7 @@ credentials = service_account.Credentials.from_service_account_info({
 
 
 
-creds = ServiceAccountCredentials.from_json_keyfile_name("crds.json") 
+creds = ServiceAccountCredentials.from_json_keyfile_name("crds.json", scopes=scopes) 
 
 client = gspread.authorize(creds)
 
